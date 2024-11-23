@@ -1,23 +1,21 @@
-console.log("imageHost.js gh");
-
-class imageHost {
-  static apiKey = localStorage.getItem("imageHostApiKey");
-  static authToken = localStorage.getItem("imageHostAuthToken");
+export class ImageHost {
+  static apiKey = localStorage.getItem("ImageHostApiKey");
+  static authToken = localStorage.getItem("ImageHostAuthToken");
 
   static async ready() {
-    return !!imageHost.apiKey;
+    return !!ImageHost.apiKey;
   }
 
   static async auth(apiKey) {
-    localStorage.setItem("imageHostApiKey", apiKey);
-    imageHost.apiKey = apiKey;
+    localStorage.setItem("ImageHostApiKey", apiKey);
+    ImageHost.apiKey = apiKey;
     return !!apiKey;
   }
 
   static async upload(source) {
     let uploadUrl = "https://api.imgbb.com/1/upload";
     let method = "POST";
-    return fetch(`${uploadUrl}?key=${imageHost.apiKey}&image=${source}`, {
+    return fetch(`${uploadUrl}?key=${ImageHost.apiKey}&image=${source}`, {
       method,
     })
       .then((response) => response.json())
@@ -29,7 +27,7 @@ class imageHost {
     let method = "POST";
 
     let formData = new formData();
-    formData.append("auth_token", imageHost.authToken);
+    formData.append("auth_token", ImageHost.authToken);
     formData.append("pathname", "/");
     formData.append("action", "delete");
     formData.append("single", "true");
