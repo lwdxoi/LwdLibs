@@ -1,0 +1,334 @@
+html {
+  --bgc-1: #0f0f0f;
+  --bgc-2: #1f1f1f;
+  --bgc-4: #352c6f;
+  --highlight: #1afbff;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+a[lwd],
+label[lwd],
+p[lwd] {
+  font-size: 100%;
+  line-height: 100%;
+  align-content: center;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+autocomplete[lwd] {
+  position: relative;
+}
+
+autocomplete[lwd] input {
+  width: 100%;
+  height: 100%;
+}
+
+autocomplete[lwd]>div {
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  background: black;
+  z-index: 10;
+}
+
+autocomplete[lwd]>div div {
+  padding: 2px 8px;
+}
+
+autocomplete[lwd]>div div:hover {
+  background: #111;
+  cursor: pointer;
+}
+
+galery[lwd] {
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 134px);
+  grid-template-rows: repeat(auto-fill, 140px);
+  grid-gap: 8px;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+galery[lwd] .focus-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  scrollbar-width: none;
+  display: flex;
+  justify-content: space-around;
+  align-content: space-around;
+  flex-wrap: wrap;
+  user-select: none;
+  background: var(--bgc-1) !important;
+}
+
+galery[lwd] .focus-container>img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+galery[lwd] #next-btn,
+galery[lwd] #previous-btn {
+  position: fixed;
+  cursor: pointer;
+  opacity: 0%;
+  width: 30%;
+  height: 20%;
+  bottom: 10%;
+}
+
+galery[lwd] #next-btn:hover,
+galery[lwd] #previous-btn:hover {
+  opacity: 10% !important;
+}
+
+galery[lwd] #next-btn {
+  right: 10%;
+}
+
+galery[lwd] #previous-btn {
+  left: 10%;
+}
+
+.img-control[lwd] {
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  opacity: 0;
+}
+
+.full-height img {
+  max-height: unset !important;
+}
+
+.full-width img {
+  max-width: unset !important;
+}
+
+.lock-scroll img {
+  overflow: hidden !important;
+}
+
+input[lwd][type='text'] {
+  height: calc(100% - 2.66px) !important;
+  width: calc(100% - 2.66px - 8px) !important;
+  padding: 0 4px;
+  border: red solid 1.34px;
+  outline: none;
+}
+
+input[lwd]:focus {
+  border-color: var(--highlight);
+}
+
+modal[lwd] {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background: aquamarine;
+  /* width: 500px; */
+  /* height: 500px; */
+  top: calc(50% - 250px);
+  left: calc(50% - 250px);
+}
+
+modal[lwd] .headline {
+  display: flex;
+  justify-content: space-between;
+}
+
+modal[lwd] .headline H* {
+  margin: 0;
+}
+
+modal[lwd] .headline :last-child {
+  width: 16px;
+  fill: red;
+}
+
+modal[lwd] .body {
+  flex: 1;
+  overflow: auto;
+  margin: 8px 0;
+}
+
+modal[lwd] .action {
+  display: flex;
+}
+
+tile[lwd] {
+  display: block;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border: 2px inset black;
+  background: rgb(192, 192, 192);
+
+  cursor: pointer;
+
+  color: black;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+}
+
+tile[lwd] svg {
+  fill: #3f3f3f;
+}
+
+tile[lwd].active,
+tile[lwd]:active {
+  border: 2px outset gray;
+  background: var(--bgc-4);
+  color: white;
+}
+
+tile[lwd].active svg,
+tile[lwd]:active svg {
+  fill: white;
+}
+
+page[lwd] {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+pagination[lwd] {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+pagination[lwd]>div {
+  display: flex;
+  justify-content: center;
+}
+
+snackbar {
+  position: fixed;
+  top: 48px;
+  right: 32px;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+snackbar>* {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  right: -100%;
+  animation: slide-in 0.5s forwards;
+}
+
+snackbar>.out {
+  right: 0;
+  animation: slide-out 0.5s forwards;
+}
+
+snackbar .success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+snackbar .error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+snackbar .warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+@keyframes slide-in {
+  100% {
+    right: 0;
+  }
+}
+
+@keyframes slide-out {
+  100% {
+    right: -100%;
+    display: none;
+  }
+}
+
+.importBtn {
+  width: 20px;
+  height: 20px;
+  background: aqua;
+  top: 0;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+}
+
+:has(.importBtn) {
+  position: relative;
+}
+
+.importBtn.imported {
+  background: red;
+}
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  line-height: 100%;
+}
+
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #444;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbb;
+  border-radius: 2px;
+}
