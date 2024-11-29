@@ -1,4 +1,4 @@
-export class ImageHost {
+class ImageHost {
   static apiKey = localStorage.getItem("ImageHostApiKey");
   static authToken = localStorage.getItem("ImageHostAuthToken");
 
