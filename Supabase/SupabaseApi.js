@@ -4,8 +4,8 @@ class SupabaseApi {
     this.apiKey = apiKey
 
     this.headers = {
-      apikey: Supabase.apiKey,
-      Authorization: `Bearer ${Supabase.apiKey}`,
+      apikey: this.apiKey,
+      Authorization: `Bearer ${this.apiKey}`,
       "Content-Type": "application/json",
       Accept: "application/json",
       Prefer: "return=representation",
@@ -14,7 +14,7 @@ class SupabaseApi {
 
   fetch({ table, method, select = [], filter = {}, body = false }) {
     let selectParam = select.length == 0 ? "" : `select=${select.join(",")}&`;
-    let queryParams = Supabase.queryToString(filter);
+    let queryParams = SupabaseApi.queryToString(filter);
 
     let params = { method, headers: this.headers };
     if (body) params.body = JSON.stringify(body);
