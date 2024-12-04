@@ -1,4 +1,4 @@
-class SupabaseAPI {
+class SupabaseApi {
   constructor(baseApiUrl, apiKey) {
     this.baseApiUrl = baseApiUrl
     this.apiKey = apiKey
