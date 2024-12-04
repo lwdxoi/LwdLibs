@@ -1,6 +1,6 @@
 console.log("Z LwdHTML");
 
-window.LwdHTML = class {
+class LwdHTML {
   constructor(HTMLTag, attrs = {}) {
     const HTMLElement = document.createElement(HTMLTag);
     HTMLElement.setAttribute("lwd", "");
@@ -26,7 +26,7 @@ window.LwdHTML = class {
   }
 };
 
-window.LwdRoot = class LwdRoot extends LwdHTML {
+class LwdRoot extends LwdHTML {
   constructor() {
     super("div");
     this.setAttribute("root", "");

@@ -1,4 +1,4 @@
-export class ExternalApi {
+class ExternalApi {
   static fetchRule34xxx(search) {
     return fetch(
       `https://api.rule34.xxx/index.php?page=dapi&s=post&q=index&json=1&limit=600&tags=${search}`
