@@ -1,40 +1,48 @@
 class Session {
-  constructor(attributesKeys, settings = { prefix: '', validations: {}, beforeLoginFunctions: [], }) {
-    this.attributesKeys = attributesKeys
-    this.prefix = settings.prefix || ''
-    this.validations = settings.validations || {}
-    this.beforeLoginFunctions = settings.beforeLoginFunctions || []
+  constructor(attributesKeys, { prefix = '', validations = {}, beforeLoginFunctions = [] } = {}) {
+    this.attributesKeys = attributesKeys;
+    this.prefix = prefix;
+    this.validations = validations;
+    this.beforeLoginFunctions = beforeLoginFunctions;
   }
 
-  isValid(attributes = this.getAllData()) {
-    return Object.entries(this.validations).every(([key, validate]) =>
-      validate(attributes[key], attributes)
-    )
+  async isValid(attributes = this.getAllData()) {
+    const validationResults = await Promise.all(
+      Object.entries(this.validations).map(([key, validate]) => validate(attributes[key], attributes))
+    );
+    return validationResults.every(Boolean); // `Boolean` is a more concise way to check truthy values
   }
 
-  login(attributes) {
-    const beforeLoginReturn = this.beforeLoginFunctions.map((beforeLogin) => beforeLogin(attributes))
-    if (!this.isValid(attributes) || !beforeLoginReturn.every((x) => x)) return false;
-    Object.entries(attributes).filter(([k]) => this.#checkKey(k)).map(([k, v]) => this.setData(k, v))
-    return true
+  async login(attributes = this.getAllData()) {
+    const beforeLoginResults = await Promise.all(
+      this.beforeLoginFunctions.map(beforeLogin => beforeLogin(attributes))
+    );
+
+    if (!(await this.isValid(attributes)) || beforeLoginResults.includes(false)) return false;
+
+    Object.entries(attributes)
+      .filter(([key]) => this.#checkKey(key))
+      .forEach(([key, value]) => this.setData(key, value));
+
+    return true;
   }
 
   logout() {
-    this.attributesKeys.map(this.deleteData)
+    this.attributesKeys.forEach(this.deleteData)
   }
 
   getData(key) {
-    if (!this.#checkKey({ key })) return false
+    if (!this.#checkKey(key)) return false
     return JSON.parse(localStorage.getItem(this.prefix + key))
   }
 
   setData(key, value) {
-    if (!this.#checkKey({ key })) return false
+    if (!this.#checkKey(key)) return false
     return localStorage.setItem(this.prefix + key, JSON.stringify(value))
   }
 
   deleteData(key) {
-    if (!this.#checkKey({ key })) return false
+    if (!this.#checkKey(key)) return false
     return localStorage.removeItem(this.prefix + key)
   }
 
