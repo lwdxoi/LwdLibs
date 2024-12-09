@@ -71,5 +71,7 @@ class Session {
       console.warn(key, 'is an empty string')
       return false
     }
+
+    return true
   }
 }
