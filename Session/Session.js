@@ -8,7 +8,7 @@ class Session {
 
   async isValid(attributes = this.getAllData()) {
     const validationResults = await Promise.all(
-      Object.entries(this.validations).map(([key, validate]) => validate(attributes[key], attributes))
+      Object.entries(this.validations).map(([key, validate]) => validate(attributes[key], attributes, key))
     );
     return validationResults.every(Boolean); // `Boolean` is a more concise way to check truthy values
   }
@@ -59,5 +59,17 @@ class Session {
       return false
     }
     return true
+  }
+
+  static defaultRequiredValidation(value, _, key) {
+    if (value === undefined || value === null) {
+      console.warn(key, 'is undefined or null')
+      return false
+    }
+
+    if (value === '') {
+      console.warn(key, 'is an empty string')
+      return false
+    }
   }
 }
