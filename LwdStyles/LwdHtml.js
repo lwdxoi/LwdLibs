@@ -493,6 +493,12 @@ class LwdPagination extends LwdHTML {
   }
 }
 
+class LwdSection extends LwdHTML {
+  constructor(attrs = {}) {
+    super("section", attrs);
+  }
+}
+
 class LwdSelect extends LwdHTML {
   constructor(options, attrs = {}) {
     super("select", attrs);
