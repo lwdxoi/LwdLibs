@@ -17,4 +17,28 @@ class ExternalApi {
       })
       .catch((e) => console.log("cant fetch from fetchRule34xxx", e));
   }
+  static autocompleteRule34xxx(search) {
+    return fetch(
+      `https://ac.rule34.xxx/autocomplete.php?q=${search}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        return response.map((tag) => ({
+          name: tag.value.replaceAll('_', ' '),
+          category: tag.type,
+          count: tag.label.split(' ')[1].replaceAll(/[\(\)]/g, '')
+        }))
+      })
+      .catch((e) => console.log("cant fetch from fetchRule34xxx", e));
+  }
+  static autocompleteE621(search) {
+    return fetch(
+      `https://e621.net/tags/autocomplete.json?expiry=7&search[name_matches]=${search}`
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        return response
+      })
+      .catch((e) => console.log("cant fetch from fetchRule34xxx", e));
+  }
 };
